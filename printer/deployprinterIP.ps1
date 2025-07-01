@@ -1,3 +1,4 @@
+# Deploy printers over IP (useful when cloudonly solution)
 $ErrorActionPreference = "Stop"
 
 #Set name of printer, IP, Driver and Printer Port name below
