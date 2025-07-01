@@ -13,7 +13,6 @@ foreach ($printer in $printers) {
         } catch {
             Write-Host "Error installing printer port: $($printer.PortName)"
             $printersOK = $false
-            continue
         }
     }
 
@@ -24,7 +23,6 @@ foreach ($printer in $printers) {
         } catch {
             Write-Host "Error adding printer: $($printer.Name)"
             $printersOK = $false
-            continue
         }
     }
 }
