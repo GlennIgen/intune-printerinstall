@@ -1,5 +1,4 @@
-$ErrorActionPreference = "Stop"
-
+# Use this to install driver before the printer(s)
 # Driver data
 $PrinterDriverName = "Driver Name 1"
 $InfPath = Resolve-Path ".\DRIVER-INF-FILE.inf"
