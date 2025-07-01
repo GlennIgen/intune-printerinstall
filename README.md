@@ -31,11 +31,35 @@ driver/
      ```powershell
      C:\Windows\Sysnative\WindowsPowerShell\v1.0\powershell.exe -ExecutionPolicy Bypass -File .\driverinstall.ps1
      ```
-   - Define detection logic as needed (e.g., check for installed printer driver).
+   - Define detection logic as needed.
+
+### 3. Detection Suggestions
+
+When configuring the detection rule in Intune, you can use one or more of the following:
+
+- **Shared printers (\\server\printer):**  
+  Check if the printer exists in the registry at:  
+  `HKEY_CURRENT_USER\Printers\Connections\,,server.domain.local,Printer 1`
+
+- **IP-based printers:**  
+  Check if the printer exists in the registry at:  
+  `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Print\Printers\Printer 1`
+
+- **Driver presence:**  
+  Look for a folder named after the `.inf` file in:  
+  `C:\Windows\System32\DriverStore\FileRepository`
+
+  The folder name is based on the driver's `.inf` file and includes architecture/hash values  
+  (e.g. `koawqja.inf_amd64_0c123456abcdef01`).
+
+  To determine the correct folder name:
+  1. Install the driver manually on a test machine or VM.
+  2. Navigate to `C:\Windows\System32\DriverStore\FileRepository`
+  3. Sort by **Date modified** to find the most recently created folder.
+  4. Use the exact folder name for detection in Intune.
 
 
-
-### 3. Deploy Printers (Optional)
+## 4. Deploy Printers (Optional)
 
 To deploy shared or IP-based printers, see the scripts in the `printer/` folder. These can be packaged and assigned separately in Intune.
 
