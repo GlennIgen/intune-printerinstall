@@ -22,6 +22,9 @@ foreach ($printer in $printers) {
     $existingPrinter = Get-Printer -Name $printer.Name -ErrorAction SilentlyContinue
     if (-not $existingPrinter -or $existingPrinter.PortName -ne $printer.PortName) {
         try {
+        if($existingPrinter){
+            Remove-Printer -Name $printer.Name -ErrorAction SilentlyContinue
+        }
             Add-Printer -Name $printer.Name -DriverName $printer.Driver -PortName $printer.PortName
             $printersOK = $true
         } catch {
