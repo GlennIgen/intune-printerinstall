@@ -19,7 +19,8 @@ foreach ($printer in $printers) {
     }
 
 # Add printe with; name, driver and port name
-    if (-not (Get-Printer -Name $printer.Name -ErrorAction SilentlyContinue)) {
+    $existingPrinter = Get-Printer -Name $printer.Name -ErrorAction SilentlyContinue
+    if (-not $existingPrinter -or $existingPrinter.PortName -ne $printer.PortName) {
         try {
             Add-Printer -Name $printer.Name -DriverName $printer.Driver -PortName $printer.PortName
             $printersOK = $true
@@ -27,6 +28,9 @@ foreach ($printer in $printers) {
             Write-Host "Error adding printer: $($printer.Name)"
             $printersOK = $false
         }
+    }else{
+        Write-Host "Printer, and printer port already installed."
+        $printersOK = $true
     }
 }
 # Completion status
