@@ -52,14 +52,13 @@ When configuring the detection rule in Intune, you can use one or more of the fo
   The folder name is based on the driver's `.inf` file and includes architecture/hash values  
   (e.g. `koawqja.inf_amd64_0c123456abcdef01`).
 
-  Alternative look for the driver in the registry `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Print\Environments\`
-
   To determine the correct folder name:
   1. Install the driver manually on a test machine or VM.
   2. Navigate to `C:\Windows\System32\DriverStore\FileRepository`
   3. Sort by **Date modified** to find the most recently created folder.
   4. Use the exact folder name for detection in Intune.
-
+ 
+  Alternative look for the driver in the registry `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Print\Environments\`
 
 ## 4. Deploy Printers (Optional)
 
