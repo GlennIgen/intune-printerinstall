@@ -26,13 +26,15 @@ foreach ($printer in $printers) {
             Remove-Printer -Name $printer.Name -ErrorAction SilentlyContinue
         }
             Add-Printer -Name $printer.Name -DriverName $printer.Driver -PortName $printer.PortName
+            #Set Color true for printer
+            Set-PrintConfiguration -PrinterName $printer.Name -Color $true -ErrorAction SilentlyContinue
             $printersOK = $true
         } catch {
             Write-Host "Error adding printer: $($printer.Name)"
             $printersOK = $false
         }
     }else{
-        Write-Host "Printer, and printer port already installed."
+        #Write-Host "Printer, and printer port already installed."
         $printersOK = $true
     }
 }

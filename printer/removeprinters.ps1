@@ -8,7 +8,6 @@ $oldPrinters = @(
 $totalOldPrinters = $oldPrinters.Count
 $removedPrintersCount = 0
 foreach ($printer in $oldPrinters) {
-    Write-Host $printer.Name
     if (Get-Printer -Name $printer.Name -ErrorAction SilentlyContinue) {
         try {
             Remove-Printer -Name $printer.Name -ErrorAction SilentlyContinue
