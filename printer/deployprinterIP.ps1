@@ -13,7 +13,7 @@ foreach ($printer in $printers) {
             Add-PrinterPort -Name $printer.PortName -PrinterHostAddress $printer.IP
             $printerPortsOK = $true
         } catch {
-            Write-Host "Error installing printer port: $($printer.PortName)"
+            Write-Output "Error installing printer port: $($printer.PortName)"
             $printerPortsOK = $false
         }
     }
@@ -30,11 +30,11 @@ foreach ($printer in $printers) {
             Set-PrintConfiguration -PrinterName $printer.Name -Color $true -ErrorAction SilentlyContinue
             $printersOK = $true
         } catch {
-            Write-Host "Error adding printer: $($printer.Name)"
+            Write-Output "Error adding printer: $($printer.Name)"
             $printersOK = $false
         }
     }else{
-        #Write-Host "Printer, and printer port already installed."
+        Write-Output "Printer, and printer port already installed."
         $printersOK = $true
     }
 }

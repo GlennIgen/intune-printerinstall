@@ -9,11 +9,11 @@ foreach ($printer in $printers) {
         try {
             Add-Printer -ConnectionName $printer -ErrorAction SilentlyContinue
         } catch {
-            Write-Host "Error installing printer: $printer"
+            Write-Output "Error installing printer: $printer"
             $printersOK = $false
         }
     } else {
-        #Write-Host "Printer already installed: $printer"
+        Write-Output "Printer already installed: $printer"
     }
 }
 
