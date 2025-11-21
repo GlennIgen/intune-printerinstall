@@ -1,0 +1,3 @@
+PrinterIP,PrinterName,PrinterPort,Color,PrinterDriverName
+10.0.0.10,Printer 1,10.0.0.10_port1,TRUE,Driver 1
+10.0.0.11,Printer 2,10.0.0.11_port1,FALSE,Driver 2
