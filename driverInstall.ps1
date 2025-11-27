@@ -10,9 +10,9 @@ if (-not (Test-Path -Path $CsvPath)) {
 }
 
 $drivers = Import-Csv -Path $CsvPath -Delimiter ","
-$requiredColumns = 'DriverName', 'InfFileDOTinf'
+$requiredColumns = 'DriverName', 'InfFileDOTinf', 'DriverFolderName'
 foreach ($col in $requiredColumns) {
-    if (-not ($printers | Get-Member -Name $col -MemberType NoteProperty)) {
+    if (-not ($drivers | Get-Member -Name $col -MemberType NoteProperty)) {
         Write-Error "CSV is missing required column: $($col)"
         exit 1
     }
@@ -26,7 +26,8 @@ foreach ($driver in $drivers) {
     $driverInstalled = $null
 
     $DriverName = $driver.DriverName
-    $InfFileDOTinf = Resolve-Path -Path ".\drivers\$($driver.InfFileDOTinf)"
+    $DriverFolderName = $driver.DriverFolderName
+    $InfFileDOTinf = Resolve-Path -Path ".\$($DriverFolderName)\$($driver.InfFileDOTinf)"
 
     # Check if driver is already installed
     if (-not (Get-PrinterDriver -Name $DriverName -ErrorAction SilentlyContinue)) {
